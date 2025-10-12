@@ -57,7 +57,6 @@
 <body>
 
 <div class="overlay-title">Rajkiya High School Khajhara</div>
-
 <div id="pages" class="page"></div>
 <div id="webgl-root"></div>
 
@@ -66,21 +65,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <script>
-// ---------- WebGL Check ----------
 if (!window.WebGLRenderingContext) {
   document.body.insertAdjacentHTML('afterbegin', '<div class="no-webgl">WebGL not supported.</div>');
   throw new Error('No WebGL support');
 }
 
-// ---------- Configuration ----------
 const IMAGE_URLS = [
   "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/GHS.png",
   "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/Science%20exhibition.png",
   "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/exhibition.png",
   "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/poster.png",
   "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/post.png",
-  "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/preyer.png",
-  "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/preyer.png" // agar duplicate nahi chahiye, ise hata dein
+  "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/preyer.png"
 ];
 
 const SCENE_COUNT = IMAGE_URLS.length;
@@ -90,7 +86,6 @@ const CAMERA_Z = 1.6;
 const MOUSE_INTENSITY = 0.25;
 const LERP_EASE = 0.08;
 
-// ---------- Three.js Setup ----------
 const container = document.getElementById('webgl-root');
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(VIEWPORT.w, VIEWPORT.h);
