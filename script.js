@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll(".hero-slider .slide");
     if (slides.length > 0) {
         let currentSlide = 0;
-        const slideInterval = 5000; // 5 seconds
+        const slideInterval = 5000;
 
         const nextSlide = () => {
             slides[currentSlide].classList.remove('active');
@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
             slides[currentSlide].classList.add('active');
         };
 
-        slides[0].classList.add('active'); // Show first slide immediately
         setInterval(nextSlide, slideInterval);
     }
 
@@ -34,11 +33,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const parallaxBg = document.querySelector('.parallax-bg');
     if (parallaxBg) {
         window.addEventListener('scroll', () => {
-            const offset = window.pageYOffset;
-            // This calculation keeps the image centered and moves it slower than scroll
-            parallaxBg.style.transform = `translateY(${offset * 0.3 - (parallaxBg.offsetHeight / 5)}px)`;
+            const scrollPosition = window.pageYOffset;
+            const parallaxContainer = document.querySelector('.parallax-container');
+            const containerTop = parallaxContainer.offsetTop;
+            const containerHeight = parallaxContainer.offsetHeight;
+
+            if (scrollPosition + window.innerHeight > containerTop && scrollPosition < containerTop + containerHeight) {
+                const scrolledThrough = (scrollPosition + window.innerHeight - containerTop) / (containerHeight + window.innerHeight);
+                const transformValue = (scrolledThrough * -100) - 50; // Fine-tuned values
+                parallaxBg.style.transform = `translateY(${transformValue}px)`;
+            }
         });
     }
+
+    // Reveal on Scroll Animation
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        revealElements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) { // Reveal when 100px from bottom
+                el.classList.add('active');
+            }
+        });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Initial check on page load
 
     // Image Popup (Modal) Functionality
     const popup = document.getElementById("image-popup");
@@ -57,18 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const closePopup = () => {
-        if (popup) {
-            popup.classList.remove("active");
-        }
-    };
-
+    const closePopup = () => { if (popup) popup.classList.remove("active"); };
     if (popup) {
         closeBtn.addEventListener("click", closePopup);
-        popup.addEventListener("click", (e) => {
-            if (e.target === popup) {
-                closePopup();
-            }
-        });
+        popup.addEventListener("click", e => { if (e.target === popup) closePopup(); });
     }
 });
