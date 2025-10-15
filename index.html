@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Parallax Test</title>
-<style>
-  html, body { margin:0; padding:0; width:100%; height:100%; background:#fff; }
-  #webgl-root { width:100vw; height:100vh; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajkiya High School Khajhara, Chandauli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="webgl-root"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-<script>
-const IMAGE_URLS = [
-  "https://raw.githubusercontent.com/GHSKHAJHARA/ghs-parallax/main/GHS.png"
-];
-const VIEWPORT = { w: window.innerWidth, h: window.innerHeight };
-const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
-renderer.setSize(VIEWPORT.w, VIEWPORT.h);
-document.getElementById('webgl-root').appendChild(renderer.domElement);
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
-const camera = new THREE.PerspectiveCamera(50, VIEWPORT.w/VIEWPORT.h, 0.1, 100);
-camera.position.z = 2;
+    <header class="header">
+        <nav class="navbar container">
+            <div class="logo">
+                <img src="https://i.postimg.cc/rsbw9S8w/School-logo-png.png" alt="School Logo">
+                <h1 class="school-name">Rajkiya High School Khajhara</h1>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#admission">Admission</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
 
-const ambient = new THREE.AmbientLight(0xffffff, 1);
-scene.add(ambient);
+    <section class="hero-section">
+        <div class="hero-text">
+            <h2>Welcome to a Place of Learning & Growth</h2>
+            <p>Fostering the leaders of tomorrow with quality education.</p>
+        </div>
+        <div class="hero-images">
+            <img src="https://i.postimg.cc/PqhdycgR/GHS.png" alt="School Building" class="popup-img" data-details="The main building of our school, providing a serene environment for education.">
+            <img src="https://i.postimg.cc/vB3fFJMc/preyer.png" alt="Morning Prayer" class="popup-img" data-details="Students participating in the morning assembly, starting the day with positivity.">
+            <img src="https://i.postimg.cc/WbySCk1L/Science-exhibition.png" alt="Science Exhibition" class="popup-img" data-details="A glimpse of our annual science exhibition where students showcase their innovative projects.">
+        </div>
+    </section>
 
-const loader = new THREE.TextureLoader();
-loader.load(IMAGE_URLS[0], function(texture) {
-  const aspect = texture.image.width/texture.image.height;
-  const geo = new THREE.PlaneGeometry(2*aspect,2,1,1);
-  const mat = new THREE.MeshBasicMaterial({ map:texture });
-  const mesh = new THREE.Mesh(geo, mat);
-  scene.add(mesh);
-  animate();
-}, undefined, function(err) {
-  alert("Image failed to load: " + err);
-});
+    <section class="parallax-section" id="about" style="background-image: url('https://i.postimg.cc/TwWTjmw0/exhibition.png');">
+        <div class="parallax-content">
+            <h2>About Our School</h2>
+            <p>Rajkiya High School Khajhara is committed to providing quality education and fostering an environment of intellectual growth and character development.</p>
+        </div>
+    </section>
 
-function animate() {
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera);
-}
-</script>
+    <main class="main-content container" id="gallery">
+        <h2 class="section-title">Our Gallery</h2>
+        <p class="section-subtitle">A glimpse into the life at our school. Click on any image to view details.</p>
+        <div class="gallery-grid">
+            <img src="https://i.postimg.cc/4NNDvVmp/poster.png" alt="Poster Competition" class="popup-img" data-details="Students' creativity on display during the poster making competition.">
+            <img src="https://i.postimg.cc/RhqThSZN/post.png" alt="Student Achievement" class="popup-img" data-details="Celebrating the achievements and certifications of our talented students.">
+            <img src="https://i.postimg.cc/TwWTjmw0/exhibition.png" alt="Exhibition View" class="popup-img" data-details="An overview of the exhibits prepared by students with great enthusiasm.">
+            <img src="https://i.postimg.cc/WbySCk1L/Science-exhibition.png" alt="Science Project" class="popup-img" data-details="A detailed look at one of the winning projects from the science exhibition.">
+        </div>
+    </main>
+    
+    <section class="parallax-section" style="background-image: url('https://i.postimg.cc/vB3fFJMc/preyer.png');">
+        <div class="parallax-content">
+            <h2>Our Vision</h2>
+            <p>To empower students with the knowledge and skills to excel in a rapidly changing world.</p>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>&copy; 2025 Rajkiya High School Khajhara, Chandauli. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="image-popup" class="popup">
+        <span class="close-btn">&times;</span>
+        <div class="popup-content">
+            <div class="popup-details">
+                <h3>Image Details</h3>
+                <p id="popup-text">Details about the image will appear here.</p>
+            </div>
+            <div class="popup-image-container">
+                <img class="popup-image" id="popup-img-src" src="" alt="Popup Image">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
