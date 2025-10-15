@@ -1,52 +1,21 @@
 :root {
     --primary-color: #0d6efd;
-    --secondary-color: #6c757d;
     --dark-color: #212529;
-    --light-color: #f8f9fa;
     --text-color: #495057;
-    --shadow: 0 5px 15px rgba(0,0,0,0.1);
+    --shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: #fff;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Poppins', sans-serif; line-height: 1.7; color: var(--text-color); background-color: #fdfdfd; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
 /* Header & Navigation */
-.header {
-    background: #fff;
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-}
+.header { background: #fff; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 1000; }
+.navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; }
 .logo { display: flex; align-items: center; }
 .logo img { height: 60px; margin-right: 15px; }
-.school-name { font-size: 1.5rem; color: var(--primary-color); }
+.school-name { font-size: 1.4rem; color: var(--primary-color); }
 .hamburger { display: none; cursor: pointer; }
 .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--dark-color); transition: all 0.3s ease-in-out; }
 .nav-menu { display: flex; list-style: none; }
@@ -54,135 +23,55 @@ body {
 .nav-menu a:hover { color: var(--primary-color); }
 
 /* Premium Hero Slider (FIXED) */
-.hero-slider {
-    position: relative;
-    height: 90vh;
-    overflow: hidden;
-}
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
+.hero-slider { position: relative; height: 90vh; overflow: hidden; background: #000; }
+.slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.5s ease-in-out; }
+.slide.active { opacity: 1; }
+.slide img {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    transform: scale(1.1);
-}
-.slide.active {
-    opacity: 1;
+    object-fit: cover; /* This prevents image from being cut */
+    object-position: center;
     animation: kenBurns 20s linear infinite;
 }
 @keyframes kenBurns {
     0% { transform: scale(1.1) rotate(0.5deg); }
     100% { transform: scale(1) rotate(-0.5deg); }
 }
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
-    z-index: 1;
-}
-.hero-text {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.hero-text h2 {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    animation: fadeInDown 1.5s ease-out;
-}
-.hero-text p {
-    font-size: 1.2rem;
-    animation: fadeInUp 1.5s ease-out;
-}
-
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
+.hero-text { position: absolute; z-index: 2; color: #fff; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; }
+.hero-text h2 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+.hero-text p { font-size: 1.2rem; }
 
 /* Premium JS Parallax Section (FIXED) */
-.parallax-container {
-    position: relative;
-    height: 450px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.parallax-bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 140%; /* Taller than container */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-}
-.parallax-content {
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 40px 60px;
-    text-align: center;
-    border-radius: 10px;
-}
-.parallax-content h2 { font-size: 2.5rem; margin-bottom: 10px; }
-
+.parallax-container { position: relative; height: 400px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+.parallax-bg { position: absolute; left: 0; top: -25%; width: 100%; height: 150%; background-size: cover; background-position: center; z-index: -1; }
+.parallax-content { background: rgba(0, 0, 0, 0.6); color: #fff; padding: 40px 60px; text-align: center; border-radius: 10px; }
+.parallax-content h2 { font-size: 2.5rem; }
 
 /* Main Content & Gallery */
-.main-content {
-    padding: 80px 20px;
-    text-align: center;
-}
-.section-title { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
-.section-subtitle { max-width: 600px; margin: 0 auto 40px auto; }
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-.gallery-grid img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.gallery-grid img:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-}
+.main-content { padding: 100px 20px; }
+.section-title { text-align: center; font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
+.section-subtitle { text-align: center; max-width: 700px; margin: 0 auto 50px auto; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.gallery-grid img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+.gallery-grid img:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
 
+/* Reveal on Scroll Animation */
+.reveal { position: relative; opacity: 0; transform: translateY(50px); transition: opacity 0.8s, transform 0.8s; }
+.reveal.active { opacity: 1; transform: translateY(0); }
 
 /* Image Popup Modal */
-.popup { position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; }
+.popup { position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; }
 .popup.active { display: flex; }
 .popup-content { display: flex; background: #fff; width: 90%; max-width: 1000px; height: 80vh; border-radius: 10px; overflow: hidden; position: relative; animation: zoomIn 0.3s; }
-@keyframes zoomIn { from { transform: scale(0.5); } to { transform: scale(1); } }
+@keyframes zoomIn { from { transform: scale(0.7); } to { transform: scale(1); } }
 .close-btn { position: absolute; top: 15px; right: 25px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10; }
 .popup-details { flex: 1; padding: 40px; overflow-y: auto; }
-.popup-image-container { flex: 2; background: #000; }
+.popup-image-container { flex: 2; background: #111; }
 .popup-image { width: 100%; height: 100%; object-fit: contain; }
 
-
 /* Footer */
-.footer {
-    background: var(--dark-color);
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
+.footer { background: var(--dark-color); color: #fff; text-align: center; padding: 25px 0; }
 
 /* Responsive Design */
 @media(max-width: 768px) {
@@ -194,7 +83,6 @@ body {
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    .hero-text h2 { font-size: 2rem; }
+    .hero-text h2 { font-size: 2.2rem; }
     .popup-content { flex-direction: column; height: 90vh; }
 }
